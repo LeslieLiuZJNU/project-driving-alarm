@@ -1,0 +1,12 @@
+#/lib/systemd/system/driving_alarm.service
+[Unit]
+Description=Driving alarm for RPi.
+After=multi-user.target rfcomm.service
+
+[Service]
+Type=idle
+Restart=on-failure
+ExecStart=python3 /home/pi/DrivingAlarmForRPi/DrivingAlarmForRPi.py
+
+[Install]
+WantedBy=multi-user.target
