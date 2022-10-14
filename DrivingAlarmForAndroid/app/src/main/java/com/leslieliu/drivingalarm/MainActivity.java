@@ -28,9 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); //获取蓝牙实例
     private String smsg = ""; //显示用数据缓存
     private TextView textView;
-    private MediaPlayer musicMediaPlayer;
-    private MediaPlayer ringtoneMediaPlayer;
-    private MediaPlayer alarmMediaPlayer;
+    private MediaPlayer mediaPlayer;
     private int currentAction = 0;
 
     BluetoothDevice mBluetoothDevice = null; //蓝牙设备
@@ -210,58 +208,33 @@ public class MainActivity extends AppCompatActivity {
 
     private void takeAction(int sign) {
         if (sign != currentAction) {
-            if (currentAction == 1) {
-                alarmMediaPlayer.stop();
-                alarmMediaPlayer = null;
-            } else if (currentAction == 2) {
-                musicMediaPlayer.stop();
-                musicMediaPlayer = null;
-            } else if (currentAction == 3) {
-                ringtoneMediaPlayer.stop();
-                ringtoneMediaPlayer = null;
-            } else if (currentAction == 4) {
-                alarmMediaPlayer.stop();
-                alarmMediaPlayer = null;
-            } else if (currentAction == 5) {
-                alarmMediaPlayer.stop();
-                alarmMediaPlayer = null;
+            if (mediaPlayer != null) {
+                mediaPlayer.release();
+                mediaPlayer = null;
             }
             if (sign == 0) textView.setText("无消息");
             else if (sign == 1) {
-                alarmMediaPlayer = MediaPlayer.create(this, R.raw.alarm);
-                alarmMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                alarmMediaPlayer.setVolume(1.0f, 1.0f);
-                alarmMediaPlayer.setLooping(true);
-                alarmMediaPlayer.start();
+                mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
+                mediaPlayer.setLooping(true);
+                mediaPlayer.start();
                 textView.setText("小心疲劳驾驶！");
             } else if (sign == 2) {
-                musicMediaPlayer = MediaPlayer.create(this, R.raw.music);
-                musicMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                musicMediaPlayer.setVolume(0.5f, 0.5f);
-                musicMediaPlayer.setLooping(true);
-                musicMediaPlayer.start();
+                mediaPlayer = MediaPlayer.create(this, R.raw.music);
+                mediaPlayer.setLooping(true);
+                mediaPlayer.start();
                 textView.setText("累了？来点音乐！");
             } else if (sign == 3) {
-                ringtoneMediaPlayer = MediaPlayer.create(this, R.raw.ringtone);
-                ringtoneMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                ringtoneMediaPlayer.setVolume(1.0f, 1.0f);
-                ringtoneMediaPlayer.setLooping(true);
-                ringtoneMediaPlayer.start();
+                mediaPlayer = MediaPlayer.create(this, R.raw.ringtone);
+                mediaPlayer.setLooping(true);
+                mediaPlayer.start();
                 textView.setText("危险！小心睡着！");
             } else if (sign == 4) {
-                alarmMediaPlayer = MediaPlayer.create(this, R.raw.alarm);
-                alarmMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                alarmMediaPlayer.setVolume(1.0f, 1.0f);
-                alarmMediaPlayer.setLooping(true);
-                alarmMediaPlayer.start();
+                mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
+                mediaPlayer.setLooping(true);
+                mediaPlayer.start();
                 textView.setText("行驶途中请勿侧身！");
-            } else if (sign == 5) {
-                alarmMediaPlayer = MediaPlayer.create(this, R.raw.alarm);
-                alarmMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                alarmMediaPlayer.setVolume(1.0f, 1.0f);
-                alarmMediaPlayer.setLooping(true);
-                alarmMediaPlayer.start();
-                textView.setText("发生交通事故！");
+            } else if (sign == 5) { //未使用
+                textView.setText("无消息");
             }
             currentAction = sign;
         }
