@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -214,27 +213,25 @@ public class MainActivity extends AppCompatActivity {
             }
             if (sign == 0) textView.setText("无消息");
             else if (sign == 1) {
-                mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
+                mediaPlayer = MediaPlayer.create(this, R.raw.alarm_case_1);
                 mediaPlayer.setLooping(true);
                 mediaPlayer.start();
-                textView.setText("小心疲劳驾驶！");
+                textView.setText("检测到闭眼！");
             } else if (sign == 2) {
-                mediaPlayer = MediaPlayer.create(this, R.raw.music);
+                mediaPlayer = MediaPlayer.create(this, R.raw.alarm_case_2);
                 mediaPlayer.setLooping(true);
                 mediaPlayer.start();
-                textView.setText("累了？来点音乐！");
+                textView.setText("检测到低头！");
             } else if (sign == 3) {
-                mediaPlayer = MediaPlayer.create(this, R.raw.ringtone);
+                mediaPlayer = MediaPlayer.create(this, R.raw.alarm_case_3);
                 mediaPlayer.setLooping(true);
                 mediaPlayer.start();
-                textView.setText("危险！小心睡着！");
+                textView.setText("检测到严重低头！");
             } else if (sign == 4) {
-                mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
+                mediaPlayer = MediaPlayer.create(this, R.raw.alarm_case_4);
                 mediaPlayer.setLooping(true);
                 mediaPlayer.start();
-                textView.setText("行驶途中请勿侧身！");
-            } else if (sign == 5) { //未使用
-                textView.setText("无消息");
+                textView.setText("检测到侧身！");
             }
             currentAction = sign;
         }
