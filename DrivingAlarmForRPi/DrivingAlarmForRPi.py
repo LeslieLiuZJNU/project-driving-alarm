@@ -168,13 +168,13 @@ face_mesh = mp_face_mesh.FaceMesh(
 
 while(True):
     acc_x,acc_y,acc_z=m_MPU.get_ACC()
-    if abs(acc_y)>18.0:
-        bluetooth_serial.write("5".encode())
-    elif abs(acc_x)>5.0:
+    #if abs(acc_y)>18.0:
+        #bluetooth_serial.write("5".encode())
+    if abs(acc_x)>5.0:
         bluetooth_serial.write("4".encode())
-    elif acc_y>8.0:
+    elif acc_y<-8.0:
         bluetooth_serial.write("3".encode())
-    elif acc_y>5.0:
+    elif acc_y<-5.0:
         bluetooth_serial.write("2".encode())
     else:
         #while cap.isOpened():
